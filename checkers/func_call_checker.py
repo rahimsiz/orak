@@ -1,5 +1,6 @@
 __author__ = 'ramil'
 
+import orak
 from copy import copy
 
 class FuncCallChecker:
@@ -23,7 +24,7 @@ class FuncCallChecker:
         for declaration in self.namespace.findFunc(node.func.id):
 
             declaration = copy(declaration)
-            declaration = declaration[len(node.args): -1]
+            declaration = declaration[len(node.args):]
 
             found = True
 
@@ -42,7 +43,7 @@ class FuncCallChecker:
             if len(declaration) == len(filter(lambda x: x.has_key("default"), declaration)):
                 return
 
-        raise BaseException("Test")
+        raise orak.Defect("Test")
 
 
 class Namespace:

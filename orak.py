@@ -11,13 +11,15 @@ class Checker(NodeVisitor):
 
     def visit(self, node):
         methodName = "visit_" + node.__class__.__name__.lower()
-        print methodName
+        #print methodName
         if hasattr(self.model, methodName):
             method = getattr(self.model, methodName)
             if callable(method):
                 method(node)
         super(Checker, self).visit(node)
 
+class Defect(BaseException):
+    pass;
 
 class Orak:
     filename = None
@@ -33,8 +35,12 @@ class Orak:
 
     def check(self):
         visitor = Checker(FuncCallChecker)
-        visitor.visit(self.ast)
+        try:
+            visitor.visit(self.ast)
+            return True
+        except Defect:
+            return False
 
 
 if __name__ == "__main__":
-    Orak('devtests/1.py').check()
+    Orak("tests/files/orak_func_call/simple_args_unsafe.py").check()
