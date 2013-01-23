@@ -1,7 +1,7 @@
 __author__ = 'ramil'
 
-import orak
 from copy import copy
+from defect import Defect
 
 class FuncCallChecker:
     namespace = None
@@ -43,7 +43,7 @@ class FuncCallChecker:
             if len(declaration) == len(filter(lambda x: x.has_key("default"), declaration)):
                 return
 
-        raise orak.Defect("Test")
+        raise Defect("Test")
 
 
 class Namespace:

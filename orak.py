@@ -2,6 +2,7 @@ __author__ = 'ramil'
 
 from ast import parse, NodeVisitor
 from checkers import *
+from defect import Defect
 
 class Checker(NodeVisitor):
     model = None
@@ -17,9 +18,6 @@ class Checker(NodeVisitor):
             if callable(method):
                 method(node)
         super(Checker, self).visit(node)
-
-class Defect(BaseException):
-    pass;
 
 class Orak:
     filename = None
@@ -43,4 +41,4 @@ class Orak:
 
 
 if __name__ == "__main__":
-    Orak("tests/files/orak_func_call/simple_args_unsafe.py").check()
+    Orak("tests/files/orak_func_call/simple_args_safe.py").check()

@@ -1,0 +1,2 @@
+class Defect(BaseException):
+    pass;
