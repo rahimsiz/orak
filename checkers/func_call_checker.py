@@ -21,6 +21,10 @@ class FuncCallChecker:
         self.namespace.addFuncDeclaration(node.name, args)
 
     def visit_call(self, node):
+        #HACK for methods
+        if 'id' not in node.func._fields:
+            return
+
         for declaration in self.namespace.findFunc(node.func.id):
 
             declaration = copy(declaration)
@@ -57,10 +61,12 @@ class Namespace:
         self.declarations[name] = params
 
     def findFunc(self, name):
-        if self.parent == None:
-            return [self.declarations[name]]
-        else:
-            return [self.declarations[name]] + self.parent.findFunc(name)
+        res = []
+        if name in self.declarations:
+            res.append(self.declarations[name])
+        if self.parent != None:
+            res += self.parent.findFunc(name)
+        return res
 
 
 
