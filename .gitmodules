@@ -1,0 +1,3 @@
+[submodule "tirpan"]
+	path = tirpan
+	url = git@github.com:bronikkk/tirpan.git
