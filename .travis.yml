@@ -5,3 +5,5 @@ python:
 install: 
 # command to run tests, e.g. python setup.py test
 script: python setup.py test
+before_install:
+  - git submodule update --init --recursive
